@@ -62,7 +62,7 @@ docker run -ti -d \
 	--volumes-from gogs-volumes \
 	--name=gogs \
 	-e VIRTUAL_HOST=<hostname> \
-	-e VIRTUAL_PORT=<host-port> \
+	-e VIRTUAL_PORT=3000 \
 	-e GOGS_SSH_PORT=<ssh-port> \
 	-p <sshport>:<sshport> \
 	hasufell/gentoo-gogs
@@ -88,7 +88,7 @@ docker run -ti -d \
 	--volumes-from gogs-volumes \
 	--name=gogs \
 	-e VIRTUAL_HOST=<hostname> \
-	-e VIRTUAL_PORT=<host-port> \
+	-e VIRTUAL_PORT=3000 \
 	-e GOGS_SSH_PORT=<ssh-port> \
 	-p <sshport>:<sshport> \
 	hasufell/gentoo-gogs
