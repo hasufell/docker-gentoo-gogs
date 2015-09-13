@@ -2,7 +2,7 @@
 
 if [[ ! -d /data/gogs ]] ; then
 	mkdir -p /var/run/sshd
-	mkdir -p /data/gogs/data /data/gogs/conf /data/gogs/log /data/git
+	mkdir -p /data/gogs/data /data/gogs/conf /data/gogs/log /data/git /data/gogs/custom
 fi
 
 if [[ ! -d /data/ssh ]] ; then
@@ -14,6 +14,7 @@ if [[ ! -d /data/ssh ]] ; then
 	chmod 600 /data/ssh/*
 fi
 
+ln -sf /data/gogs/custom ./custom
 ln -sf /data/gogs/log ./log
 ln -sf /data/gogs/data ./data
 ln -sf /data/git /home/git
