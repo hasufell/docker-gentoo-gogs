@@ -76,6 +76,7 @@ automatically.
 
 Make sure:
 * `Database Type` is SQLite3
+* `Domain` is set to your domain
 * `SSH Port` is set to what you specified in `GOGS_SSH_PORT` (or 22 for default)
 * `Application URL` is `https://<domain>/` (not `http`) _without_ the Port 3000
 
