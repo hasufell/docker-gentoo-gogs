@@ -46,6 +46,8 @@ RUN echo "HostKey /data/ssh/ssh_host_rsa_key" >> /etc/ssh/sshd_config && \
 ENV GOGS_CUSTOM /data/gogs
 RUN echo "export GOGS_CUSTOM=/data/gogs" >> /etc/profile
 
+RUN chown -R redis /var/log/redis
+
 COPY setup.sh /setup.sh
 RUN chmod +x /setup.sh
 COPY config/supervisord.conf /etc/supervisord.conf
