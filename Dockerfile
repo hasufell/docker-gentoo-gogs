@@ -2,11 +2,25 @@ FROM        mosaiksoftware/gentoo-amd64-paludis:latest
 MAINTAINER  Julian Ospald <hasufell@gentoo.org>
 
 
+RUN rm /etc/paludis/hooks/ebuild_preinst_pre/cleanup_files.bash
+
 ##### PACKAGE INSTALLATION #####
 
-# install nginx
-RUN chgrp paludisbuild /dev/tty && cave resolve -c docker-gogs -x && \
-	rm -rf /usr/portage/distfiles/* /srv/binhost/*
+# need '-e world' since gogs is built manually and needs all headers
+RUN chgrp paludisbuild /dev/tty && \
+	git -C /usr/portage checkout -- . && \
+	env-update && \
+	source /etc/profile && \
+	cave sync gentoo && \
+	cave update-world -s docker-gogs && \
+	cave resolve -e world -x --permit-old-version '*/*' && \
+	cave fix-linkage -x && \
+	rm -rf /usr/portage/* /srv/binhost/* \
+		/usr/share/doc/* /usr/lib64/debug/* \
+		/usr/share/man/* /usr/share/gtk-doc/* /usr/share/info/* \
+		/usr/share/mime/* /usr/share/applications/* \
+		/var/cache/paludis/names/* /var/cache/paludis/metadata/* \
+		/var/tmp/paludis/*
 
 # update etc files... hope this doesn't screw up
 RUN etc-update --automode -5
